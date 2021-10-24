@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Application.Interfaces
 {
-    interface IApplicationDbContext
+    public interface IApplicationDbContext
     {
         DbSet<User> Users { get; set; }
         DbSet<Workplace> Workplaces { get; set; }
