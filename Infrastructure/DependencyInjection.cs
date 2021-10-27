@@ -8,6 +8,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Application.Interfaces;
+using Infrastructure.Persistence.Repositories;
+using Application.Common.Interfaces;
 
 namespace Infrastructure
 {
@@ -21,6 +23,7 @@ namespace Infrastructure
                     b => b.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName)));
 
             services.AddScoped<IApplicationDbContext>(provider => provider.GetService<ApplicationDbContext>());
+            services.AddTransient<IUnitOfWork, UnitOfWork>();
 
             return services;
         }
