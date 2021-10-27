@@ -20,6 +20,12 @@ namespace API.Controllers
             return Ok(await Mediator.Send(command));
         }
 
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            return Ok(await Mediator.Send(new DeleteWorkplaceBookingCommand { Id = id }));
+        }
+
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
@@ -30,6 +36,12 @@ namespace API.Controllers
         public async Task<IActionResult> GetById(int id)
         {
             return Ok(await Mediator.Send(new GetWorkplaceBookingByIdQuery { Id = id }));
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> Update(UpdateWorkplaceBookingCommand command)
+        {
+            return Ok(await Mediator.Send(command));
         }
     }
 }

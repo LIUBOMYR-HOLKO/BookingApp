@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Application.Features.WorkplaceBookingFeatures.Commands
 {
-    public class CreateWorkplaceBookingCommand : IRequest<int>
+    public class UpdateWorkplaceBookingCommand : IRequest<int>
     {
         public int UserId { get; set; }
         public User User { get; set; }
@@ -21,14 +21,14 @@ namespace Application.Features.WorkplaceBookingFeatures.Commands
         public DateTime BookingTimeFrom { get; set; }
         public DateTime BookingTimeTo { get; set; }
         public BookingStatus BookingStatus { get; set; }
-        public class CreateWorkplaceBookingCommandHandler : IRequestHandler<CreateWorkplaceBookingCommand, int>
+        public class UpdateWorkplaceBookingCommandHandler : IRequestHandler<UpdateWorkplaceBookingCommand, int>
         {
             private readonly IUnitOfWork _unitOfWork;
-            public CreateWorkplaceBookingCommandHandler(IUnitOfWork unitOfWork)
+            public UpdateWorkplaceBookingCommandHandler(IUnitOfWork unitOfWork)
             {
                 _unitOfWork = unitOfWork;
             }
-            public async Task<int> Handle(CreateWorkplaceBookingCommand command, CancellationToken cancellationToken)
+            public async Task<int> Handle(UpdateWorkplaceBookingCommand command, CancellationToken cancellationToken)
             {
                 var workplaceBooking = new WorkplaceBooking();
                 workplaceBooking.UserId = command.UserId;
@@ -40,7 +40,7 @@ namespace Application.Features.WorkplaceBookingFeatures.Commands
                 workplaceBooking.BookingTimeTo = command.BookingTimeTo;
                 workplaceBooking.BookingStatus = command.BookingStatus;
 
-                await _unitOfWork.WorkplaceBookings.Create(workplaceBooking);
+                _unitOfWork.WorkplaceBookings.Update(workplaceBooking);
                 await _unitOfWork.Save();
 
                 return workplaceBooking.Id;
