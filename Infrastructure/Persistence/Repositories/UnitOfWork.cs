@@ -31,9 +31,9 @@ namespace Infrastructure.Persistence.Repositories
             }
         }
 
-        public void Save()
+        public async Task Save()
         {
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
         public virtual void Dispose(bool disposing)

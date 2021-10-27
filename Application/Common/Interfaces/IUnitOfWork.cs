@@ -10,6 +10,6 @@ namespace Application.Common.Interfaces
     public interface IUnitOfWork : IDisposable
     {
         IRepository<WorkplaceBooking> WorkplaceBookings { get; }
-        void Save();
+        Task Save();
     }
 }
